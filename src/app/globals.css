@@ -1,26 +1,292 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "../styles/gray-dark-theme.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Mobile Input Anti-Zoom and Keyboard Handling */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  textarea {
+    font-size: 16px !important;
   }
 }
 
+input,
+textarea,
+select {
+  font-size: 16px !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+/* Custom hover effects for interactive elements */
+.hover-lift {
+  transition: all 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.hover-subtle {
+  transition: background-color 0.2s ease;
+}
+
+.hover-subtle:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.text-link {
+  transition: color 0.2s ease;
+}
+
+.text-link:hover {
+  color: var(--accent-hover);
+}
+
+.playbook-card {
+  transition: all 0.2s ease;
+}
+
+.playbook-card:hover {
+  border-color: var(--text-accent) !important;
+  background-color: var(--bg-tertiary) !important;
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-1px);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  letter-spacing: -0.011em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+
+p, span, div, a, button, input, textarea, select {
+  font-family: inherit;
+  letter-spacing: -0.011em;
+}
+
+/* Technical Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-quaternary);
+}
+
+/* Document Content Styling for Markdown */
+.document-content {
+  color: var(--text-secondary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: none;
+  width: 100%;
+}
+
+.document-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 2rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.document-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 1.75rem 0 0.75rem 0;
+}
+
+.document-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.document-content p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  font-size: 16px;
+  max-width: none;
+}
+
+.document-content ul, .document-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.document-content ul li,
+.document-content ol li {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+}
+
+.document-content code {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+}
+
+.document-content pre {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 14px;
+}
+
+.document-content pre code {
+  background: none;
+  padding: 0;
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+.document-content a {
+  color: #3b82f6;
+  text-decoration: underline;
+  text-decoration-color: rgba(59, 130, 246, 0.5);
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+}
+
+.document-content a:hover {
+  color: #60a5fa;
+  text-decoration-color: #3b82f6;
+}
+
+.document-content strong, .document-content b {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.document-content blockquote {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  padding: 1rem;
+  border-left: 4px solid var(--border-primary);
+  border-radius: 0 0.25rem 0.25rem 0;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+.document-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+}
+
+.document-content th, .document-content td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.document-content th {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.document-content td {
+  color: var(--text-secondary);
+}
+
+.document-content tr:hover {
+  background: var(--bg-tertiary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+
+  button, .btn, a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .document-content {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .document-content h1 {
+    font-size: 24px;
+  }
+
+  .document-content h2 {
+    font-size: 20px;
+  }
+
+  .document-content h3 {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
