@@ -4,7 +4,7 @@ import EmailProvider from 'next-auth/providers/email'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { prisma } from '@/lib/prisma'
 
-const providers = [
+const providers: any[] = [
   GithubProvider({
     clientId: process.env.GITHUB_CLIENT_ID || process.env.GITHUB_ID || '',
     clientSecret: process.env.GITHUB_CLIENT_SECRET || process.env.GITHUB_SECRET || '',
